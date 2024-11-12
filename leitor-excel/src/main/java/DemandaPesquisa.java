@@ -5,7 +5,6 @@ import java.util.Date;
 public class DemandaPesquisa
 {
     private Date data;
-    private Time time;
     private Integer demanda;
     private Integer codEmpresa;
 
@@ -14,7 +13,6 @@ public class DemandaPesquisa
     public DemandaPesquisa(Date data, Time time, Integer demanda)
     {
         this.data = data;
-        this.time = time;
         this.demanda = demanda;
     }
 
@@ -26,15 +24,6 @@ public class DemandaPesquisa
     public void setData(Date data)
     {
         this.data = data;
-    }
-
-    public Time getTime()
-    {
-        return time;
-    }
-    public void setTime(Time time)
-    {
-        this.time = time;
     }
 
     public Integer getDemanda()
@@ -60,7 +49,6 @@ public class DemandaPesquisa
     {
         return "DemandaPesquisa{" +
                 "data=" + data +
-                ", time=" + time +
                 ", demanda=" + demanda + '\'' +
                 ", Código da empresa=" + codEmpresa +
                 '}';

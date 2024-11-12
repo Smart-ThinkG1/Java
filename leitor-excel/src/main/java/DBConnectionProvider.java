@@ -28,7 +28,7 @@ public class DBConnectionProvider
         DBConnectionProvider dbConnectionProvider = new DBConnectionProvider();
         JdbcTemplate connection = dbConnectionProvider.getConnection();
 
-        connection.update("INSERT INTO avaliacao (QtdEstrela,descricao_comentario,DataExtracao,empresa_idEmpresa) VALUES (?, ?, NOW(), ?)",
+        connection.update("INSERT INTO avaliacao (qtdEstrela,descricaoComentario,dataExtracao,fkEmpresa) VALUES (?, ?, NOW(), ?)",
                 avaliacao.getEstrelas(),avaliacao.getDescricao(),avaliacao.getCodEmpresa());
 
         System.out.println("Dados de avaliações inseridos no banco de dados!");
@@ -40,7 +40,7 @@ public class DBConnectionProvider
         DBConnectionProvider dbConnectionProvider = new DBConnectionProvider();
         JdbcTemplate connection = dbConnectionProvider.getConnection();
 
-        connection.update("INSERT INTO reclamacao (titulo,descricao,DataExtracao,empresa_idEmpresa) VALUES (?, ?, NOW(), ?)",
+        connection.update("INSERT INTO reclamacao (titulo,descricao,dataExtracao,fkEmpresa) VALUES (?, ?, NOW(), ?)",
                 reclamacao.getTitulo(),reclamacao.getCorpo(),reclamacao.getCodEmpresa());
 
         System.out.println("Dados de reclamações inseridos no banco de dados!");
@@ -51,8 +51,8 @@ public class DBConnectionProvider
         DBConnectionProvider dbConnectionProvider = new DBConnectionProvider();
         JdbcTemplate connection = dbConnectionProvider.getConnection();
 
-        connection.update("INSERT INTO demandaPesquisa ( nivel_interesse,TimeLeitura,DataLeitura,DataExtracao,empresa_idEmpresa) VALUES (?, ?,?, NOW(), ?)",
-                demandaPesquisa.getDemanda(),demandaPesquisa.getTime(),demandaPesquisa.getData(),demandaPesquisa.getCodEmpresa());
+        connection.update("INSERT INTO demandaPesquisa (nivelInteresse, dataLeitura, dataExtracao, fkEmpresa) VALUES (?, ?, NOW(), ?)",
+                demandaPesquisa.getDemanda(),demandaPesquisa.getData(),demandaPesquisa.getCodEmpresa());
 
         System.out.println("Dados de demanda de pesquisa inseridos no banco de dados!");
     }

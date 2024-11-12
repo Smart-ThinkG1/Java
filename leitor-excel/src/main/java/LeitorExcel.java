@@ -222,37 +222,10 @@ public class LeitorExcel
             System.out.println("Data: VALOR NULO");
         }
 
-        if (row.getCell(1) != null)
-        {
-            if (row.getCell(1).getCellType() == CellType.NUMERIC)
-            {
-                double numericValue = row.getCell(1).getNumericCellValue();
-                long timeInMillis = (long) (numericValue * 24 * 60 * 60 * 1000); // Convertendo de fração de dias para milissegundos
-                demandaPesquisa.setTime(new Time(timeInMillis % (24 * 60 * 60 * 1000)));
-            }
-            else if (row.getCell(1).getCellType() == CellType.STRING)
-            {
-                try
-                {
-                    demandaPesquisa.setTime(Time.valueOf(row.getCell(1).getStringCellValue()));
-                }
-                catch (IllegalArgumentException e)
-                {
-                    demandaPesquisa.setTime(null); // Formato inválido
-                    System.out.println("Hora inválida.");
-                }
-            }
-            System.out.println("Hora: " + demandaPesquisa.getTime());
-        }
-        else
-        {
-            demandaPesquisa.setTime(null);
-            System.out.println("Hora: VALOR NULO");
-        }
 
-        if (row.getCell(2) != null && row.getCell(2).getCellType() == CellType.NUMERIC)
+        if (row.getCell(1) != null && row.getCell(1).getCellType() == CellType.NUMERIC)
         {
-            demandaPesquisa.setDemanda((int) row.getCell(2).getNumericCellValue());
+            demandaPesquisa.setDemanda((int) row.getCell(1).getNumericCellValue());
             System.out.println("Demanda: " + demandaPesquisa.getDemanda());
         }
         else
