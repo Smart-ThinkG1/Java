@@ -16,11 +16,12 @@ public class Main
         Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Iniciando execução do programa");
 
         S3Provider s3Provider = new S3Provider();
+        S3Service s3Service = new S3Service(s3Provider);
 
         Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Iniciando listagem de arquivos do bucket");
 
         // Armazenando a lista de arquivos no bucket S3
-        List<S3Object> arquivos = s3Provider.listarArquivos();
+        List<S3Object> arquivos = s3Service.listarArquivos();
 
         // Verificando se existem arquivos no bucket S3
         if (arquivos.isEmpty())
@@ -35,7 +36,7 @@ public class Main
                 Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Arquivo encontrado: " + arquivo.key());
 
                 // Lendo o arquivo do S3 e inserindo no banco de dados
-                try (InputStream inputStream = s3Provider.obterArquivo(arquivo.key()))
+                try (InputStream inputStream = s3Service.obterArquivo(arquivo.key()))
                 {
                     DBConnectionProvider dbConnectionProvider = new DBConnectionProvider();
                     LeitorExcel leitorExcel = new LeitorExcel(dbConnectionProvider);
@@ -44,7 +45,7 @@ public class Main
                     leitorExcel.lerArquivo(arquivo.key(), inputStream);
                     Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Arquivo processado com sucesso: " + arquivo.key());
 
-                    s3Provider.deletarArquivo(arquivo.key());
+                    s3Service.deletarArquivo(arquivo.key());
                     Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Arquivo deletado do bucket: " + arquivo.key());
                 }
                 catch (Exception e)
@@ -60,7 +61,7 @@ public class Main
         File logFile = Log.colocarNaPasta();
         try
         {
-            s3Provider.enviarArquivo("logs/" + logFile.getName(), logFile);
+            s3Service.enviarArquivo("logs/" + logFile.getName(), logFile);
             Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Log enviado para S3 com sucesso.");
         }
         catch (Exception e)
