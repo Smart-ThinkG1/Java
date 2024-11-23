@@ -1,0 +1,17 @@
+[2024-11-23_00-01-07] Iniciando execução do programa
+[2024-11-23_00-01-07] Iniciando listagem de arquivos do bucket
+[2024-11-23_00-01-11] Arquivo encontrado: Avaliacoesid2.xlsx
+[2024-11-23_00-01-12] Iniciando a leitura do arquivo: Avaliacoesid2.xlsx
+[2024-11-23_00-01-19] Arquivo processado com sucesso: Avaliacoesid2.xlsx
+[2024-11-23_00-01-20] Arquivo deletado do bucket: Avaliacoesid2.xlsx
+[2024-11-23_00-01-20] Arquivo encontrado: DemandaPesquisaid1.xlsx
+[2024-11-23_00-01-21] Iniciando a leitura do arquivo: DemandaPesquisaid1.xlsx
+[2024-11-23_00-01-26] Arquivo processado com sucesso: DemandaPesquisaid1.xlsx
+[2024-11-23_00-01-27] Arquivo deletado do bucket: DemandaPesquisaid1.xlsx
+[2024-11-23_00-01-27] Processamento completo.
+[2024-11-23_00-01-28] Log enviado para S3 com sucesso.
+[2024-11-23_00-02-33] Iniciando execução do programa
+[2024-11-23_00-02-33] Iniciando listagem de arquivos do bucket
+[2024-11-23_00-02-37] Nenhum arquivo encontrado no bucket.
+[2024-11-23_00-02-37] Processamento completo.
+[2024-11-23_00-02-38] Log enviado para S3 com sucesso.
