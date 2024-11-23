@@ -29,7 +29,7 @@ public class DBConnectionProvider
         JdbcTemplate connection = dbConnectionProvider.getConnection();
 
         connection.update("INSERT INTO avaliacao (qtdEstrela,descricaoComentario,dataExtracao,fkEmpresa) VALUES (?, ?, NOW(), ?)",
-                avaliacao.getEstrelas(),avaliacao.getDescricao(),avaliacao.getCodEmpresa());
+                avaliacao.getEstrelas(),avaliacao.getComentario(),avaliacao.getCodEmpresa());
 
         System.out.println("Dados de avaliações inseridos no banco de dados!");
 
@@ -41,7 +41,7 @@ public class DBConnectionProvider
         JdbcTemplate connection = dbConnectionProvider.getConnection();
 
         connection.update("INSERT INTO reclamacao (titulo,descricao,dataExtracao,fkEmpresa) VALUES (?, ?, NOW(), ?)",
-                reclamacao.getTitulo(),reclamacao.getCorpo(),reclamacao.getCodEmpresa());
+                reclamacao.getTitulo(),reclamacao.getComentario(),reclamacao.getCodEmpresa());
 
         System.out.println("Dados de reclamações inseridos no banco de dados!");
     }

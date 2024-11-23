@@ -147,11 +147,11 @@ public class LeitorExcel
 
         if (row.getCell(1) != null && !row.getCell(1).getStringCellValue().trim().isEmpty())
         {
-            reclamacao.setCorpo(row.getCell(1).getStringCellValue());
-            System.out.println("Corpo: " + reclamacao.getCorpo());
+            reclamacao.setComentario(row.getCell(1).getStringCellValue());
+            System.out.println("Corpo: " + reclamacao.getComentario());
         } else
         {
-            reclamacao.setCorpo(null);
+            reclamacao.setComentario(null);
             System.out.println("Corpo: VALOR NULO");
         }
 
@@ -175,14 +175,14 @@ public class LeitorExcel
             // Verifica se a descrição contém caracteres indesejados
             Matcher matcher = pattern.matcher(descricao);
             if (matcher.find()) {
-                avaliacao.setDescricao(null);
+                avaliacao.setComentario(null);
                 System.out.println("Nota: CARACTERES INVÁLIDOS DETECTADOS");
             } else {
-                avaliacao.setDescricao(descricao);
-                System.out.println("Nota: " + avaliacao.getDescricao());
+                avaliacao.setComentario(descricao);
+                System.out.println("Nota: " + avaliacao.getComentario());
             }
         } else {
-            avaliacao.setDescricao(null);
+            avaliacao.setComentario(null);
             System.out.println("Nota: VALOR NULO");
         }
 
