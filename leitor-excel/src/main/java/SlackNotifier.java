@@ -8,28 +8,31 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SlackNotifier
-{
-    private static final String TOKEN = "xoxb-8113017461600-8115125090816-HamiIpU1bLGItvqUeXxYv8qf";
+public class SlackNotifier {
+    private final String token; // Removido o valor fixo
     private final Slack slack;
 
+    // Construtor que lê o token a partir da variável de ambiente
     public SlackNotifier()
     {
+        this.token = System.getenv("SLACK_API_TOKEN"); 
+        if (this.token == null)
+        {
+            throw new IllegalArgumentException("Token do Slack não está definido na variável de ambiente SLACK_API_TOKEN.");
+        }
         this.slack = Slack.getInstance();
     }
 
     public Map<String, String> listarUsuariosSlack()
     {
         Map<String, String> usuarios = new HashMap<>();
-        try
-        {
-            UsersListResponse response = slack.methods(TOKEN).usersList(r -> r);
+        try {
+            UsersListResponse response = slack.methods(token).usersList(r -> r);
             if (response.isOk())
             {
                 response.getMembers().forEach(user ->
                 {
                     String userId = user.getId();
-                    // Verifica se o perfil não é nulo e se contém o email
                     String email = user.getProfile() != null && user.getProfile().getEmail() != null ?
                             user.getProfile().getEmail() : null;
 
@@ -39,8 +42,8 @@ public class SlackNotifier
                     System.out.println(user.getProfile());
 
                     if (email != null)
-                    { // Verifica se email não é nulo e não está vazio
-                        usuarios.put(email, userId); // Mapeia e-mail para userId
+                    {
+                        usuarios.put(email, userId);
                     }
                 });
             }
@@ -48,7 +51,8 @@ public class SlackNotifier
             {
                 System.out.println("Erro ao listar usuários: " + response.getError());
             }
-        } catch (IOException | SlackApiException e)
+        }
+        catch (IOException | SlackApiException e)
         {
             e.printStackTrace();
         }
@@ -64,17 +68,13 @@ public class SlackNotifier
                     .text(mensagem)
                     .build();
 
-            ChatPostMessageResponse response = slack.methods(TOKEN).chatPostMessage(request);
-            if (response.isOk())
-            {
+            ChatPostMessageResponse response = slack.methods(token).chatPostMessage(request);
+            if (response.isOk()) {
                 System.out.println("Mensagem enviada ao usuário com sucesso!");
-            }
-            else
-            {
+            } else {
                 System.out.println("Erro ao enviar mensagem: " + response.getError());
             }
-        }
-        catch (IOException | SlackApiException e)
+        } catch (IOException | SlackApiException e)
         {
             e.printStackTrace();
         }
