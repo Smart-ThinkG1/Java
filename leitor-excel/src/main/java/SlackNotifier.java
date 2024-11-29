@@ -9,13 +9,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SlackNotifier {
-    private final String token; // Removido o valor fixo
+    private final String token;
     private final Slack slack;
 
     // Construtor que lê o token a partir da variável de ambiente
     public SlackNotifier()
     {
-        this.token = System.getenv("SLACK_API_TOKEN"); 
+        this.token = System.getenv("SLACK_API_TOKEN");
         if (this.token == null)
         {
             throw new IllegalArgumentException("Token do Slack não está definido na variável de ambiente SLACK_API_TOKEN.");
