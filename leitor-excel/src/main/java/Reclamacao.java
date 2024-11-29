@@ -2,6 +2,7 @@ public class Reclamacao extends Feedback
 {
     private String titulo;
 
+    //Construtores
     public Reclamacao() {}
 
     public Reclamacao(Integer codEmpresa, String comentario, String titulo)
@@ -10,6 +11,7 @@ public class Reclamacao extends Feedback
         this.titulo = titulo;
     }
 
+    //Getters e Setters
     public String getTitulo()
     {
         return titulo;

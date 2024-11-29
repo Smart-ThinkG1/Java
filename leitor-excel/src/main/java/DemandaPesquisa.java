@@ -8,6 +8,7 @@ public class DemandaPesquisa
     private Integer demanda;
     private Integer codEmpresa;
 
+    //Construtores
     public DemandaPesquisa() {}
 
     public DemandaPesquisa(Date data, Time time, Integer demanda)

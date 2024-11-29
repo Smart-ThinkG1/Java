@@ -22,7 +22,8 @@ public class DBConnectionProvider
         this.dataSource = mysqlDataSource;
     }
 
-    //Inserts de acordo com o arquivo lido
+    //Inserts de acordo com a tabela e o arquivo lido
+
     public void insertAvaliacao(Avaliacao avaliacao)
     {
         DBConnectionProvider dbConnectionProvider = new DBConnectionProvider();
@@ -55,6 +56,13 @@ public class DBConnectionProvider
                 demandaPesquisa.getDemanda(),demandaPesquisa.getData(),demandaPesquisa.getCodEmpresa());
 
         System.out.println("Dados de demanda de pesquisa inseridos no banco de dados!");
+    }
+
+    public String buscarEmailUsuario(Integer idEmpresa)
+    {
+        JdbcTemplate connection = getConnection();
+        String sql = "SELECT email FROM funcionario WHERE fkEmpresa = ?";
+        return connection.queryForObject(sql, new Object[]{idEmpresa}, String.class);
     }
 
     // Retorna um JdbcTemplate para executar operações no banco de dados

@@ -9,16 +9,18 @@ import java.util.stream.Collectors;
 public class S3Service
 {
     private final S3Provider s3Provider;
+    private String bucket_name;
 
-    public S3Service(S3Provider s3Provider)
+    public S3Service(S3Provider s3Provider,String bucketName)
     {
         this.s3Provider = s3Provider;
+        this.bucket_name = bucketName;
     }
 
     public List<S3Object> listarArquivos()
     {
         ListObjectsRequest listObjects = ListObjectsRequest.builder()
-                .bucket("smart-think-s3")
+                .bucket(bucket_name)
                 .build();
         return s3Provider.getS3Client().listObjects(listObjects).contents()
                 .stream()
@@ -29,7 +31,7 @@ public class S3Service
     public InputStream obterArquivo(String fileName) throws IOException
     {
         GetObjectRequest getObjectRequest = GetObjectRequest.builder()
-                .bucket("smart-think-s3")
+                .bucket(bucket_name)
                 .key(fileName)
                 .build();
         return s3Provider.getS3Client().getObject(getObjectRequest);
@@ -38,16 +40,17 @@ public class S3Service
     public void deletarArquivo(String fileName)
     {
         DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
-                .bucket("smart-think-s3")
+                .bucket(bucket_name)
                 .key(fileName)
                 .build();
         s3Provider.getS3Client().deleteObject(deleteObjectRequest);
     }
 
+    //Envia os logs
     public void enviarArquivo(String key, File file)
     {
         PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-                .bucket("smart-think-s3")
+                .bucket(bucket_name)
                 .key(key)
                 .build();
         s3Provider.getS3Client().putObject(putObjectRequest, RequestBody.fromFile(file));

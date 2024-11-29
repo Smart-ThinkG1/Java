@@ -2,6 +2,7 @@ public class Avaliacao extends Feedback
 {
     private Integer estrelas;
 
+    //Construtores
     public Avaliacao() {}
 
     public Avaliacao(Integer codEmpresa, String comentario, Integer estrelas)
@@ -10,11 +11,11 @@ public class Avaliacao extends Feedback
         this.estrelas = estrelas;
     }
 
+    //Getters e Setters
     public Integer getEstrelas()
     {
         return estrelas;
     }
-
     public void setEstrelas(Integer estrelas)
     {
         this.estrelas = estrelas;

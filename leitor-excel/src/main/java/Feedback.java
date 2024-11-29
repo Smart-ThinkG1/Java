@@ -3,6 +3,7 @@ public abstract class Feedback
     private Integer codEmpresa;
     private String comentario;
 
+    //Construtores
     public Feedback() {}
 
     public Feedback(Integer codEmpresa, String comentario)
@@ -11,6 +12,7 @@ public abstract class Feedback
         this.comentario = comentario;
     }
 
+    // Getters e Setters
     public Integer getCodEmpresa()
     {
         return codEmpresa;

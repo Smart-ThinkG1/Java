@@ -11,35 +11,36 @@ public class Main
 {
     public static void main(String[] args) throws IOException
     {
+        //Formatando a data atual
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
 
         Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Iniciando execução do programa");
 
+
+        //Criando instâncias S3
         S3Provider s3Provider = new S3Provider();
-        S3Service s3Service = new S3Service(s3Provider);
+        S3Service s3Service = new S3Service(s3Provider, "smart-think-s4");
 
         Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Iniciando listagem de arquivos do bucket");
 
-        // Armazenando a lista de arquivos no bucket S3
         List<S3Object> arquivos = s3Service.listarArquivos();
 
-        // Verificando se existem arquivos no bucket S3
+        //Verificando se existem arquivos encontrados no S2
         if (arquivos.isEmpty())
         {
             Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Nenhum arquivo encontrado no bucket.");
         }
         else
         {
-            // Listando arquivos no bucket S3
             for (S3Object arquivo : arquivos)
             {
                 Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Arquivo encontrado: " + arquivo.key());
 
-                // Lendo o arquivo do S3 e inserindo no banco de dados
                 try (InputStream inputStream = s3Service.obterArquivo(arquivo.key()))
                 {
                     DBConnectionProvider dbConnectionProvider = new DBConnectionProvider();
-                    LeitorExcel leitorExcel = new LeitorExcel(dbConnectionProvider);
+                    SlackNotifier slackNotifier = new SlackNotifier();
+                    LeitorExcel leitorExcel = new LeitorExcel(dbConnectionProvider, slackNotifier);
 
                     Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Iniciando a leitura do arquivo: " + arquivo.key());
                     leitorExcel.lerArquivo(arquivo.key(), inputStream);
@@ -57,10 +58,10 @@ public class Main
 
         Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Processamento completo.");
 
-        // Enviar log para o S3
         File logFile = Log.colocarNaPasta();
         try
         {
+            //Enviando logs para o S3
             s3Service.enviarArquivo("logs/" + logFile.getName(), logFile);
             Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Log enviado para S3 com sucesso.");
         }
@@ -68,7 +69,6 @@ public class Main
         {
             Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Erro ao enviar log para S3: " + e.getMessage());
         }
-
         System.out.println("Arquivo de log enviado para S3.");
     }
 }

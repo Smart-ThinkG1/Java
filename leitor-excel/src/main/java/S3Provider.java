@@ -6,6 +6,7 @@ public class S3Provider
 {
     private final S3Client s3Client;
 
+    //Cria a conexão com o S3
     public S3Provider()
     {
         AwsSessionCredentials credentials = AwsSessionCredentials.create(

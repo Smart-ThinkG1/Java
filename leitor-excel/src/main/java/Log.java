@@ -9,6 +9,7 @@ public class Log
     private static String nomeArquivo = nomeArquivoLog();
     private static final String PASTA_LOGS = "log";
 
+    //Cria o nome do log + a data de sua criação
     public static String nomeArquivoLog()
     {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
