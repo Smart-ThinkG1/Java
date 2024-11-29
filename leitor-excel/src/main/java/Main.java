@@ -19,7 +19,7 @@ public class Main
 
         //Criando instâncias S3
         S3Provider s3Provider = new S3Provider();
-        S3Service s3Service = new S3Service(s3Provider, "smart-think-s4");
+        S3Service s3Service = new S3Service(s3Provider, "smart-think-s3");
 
         Log.inserirNoLog("[" + LocalDateTime.now().format(formatter) + "] Iniciando listagem de arquivos do bucket");
 
