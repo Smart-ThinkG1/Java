@@ -12,7 +12,7 @@ public class SlackNotifier {
     private final String token;
     private final Slack slack;
 
-    // Construtor que lê o token a partir da variável de ambiente
+    // Construtor que lê o token a partir da variável de ambiente - teste
     public SlackNotifier()
     {
         this.token = System.getenv("SLACK_API_TOKEN");
