@@ -1,4 +1,5 @@
 import software.amazon.awssdk.auth.credentials.AwsSessionCredentials;
+import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 
@@ -9,14 +10,9 @@ public class S3Provider
     //Cria a conexão com o S3
     public S3Provider()
     {
-        AwsSessionCredentials credentials = AwsSessionCredentials.create(
-                System.getenv("AWS_ACCESS_KEY_ID"),
-                System.getenv("AWS_SECRET_ACCESS_KEY"),
-                System.getenv("AWS_SESSION_TOKEN")
-        );
         this.s3Client = S3Client.builder()
                 .region(Region.US_EAST_1)
-                .credentialsProvider(() -> credentials)
+                .credentialsProvider(DefaultCredentialsProvider.create())
                 .build();
     }
 
