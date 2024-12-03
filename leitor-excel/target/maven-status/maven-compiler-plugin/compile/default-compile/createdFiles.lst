@@ -1,0 +1,11 @@
+DBConnectionProvider.class
+Main.class
+LeitorExcel.class
+DemandaPesquisa.class
+Log.class
+Reclamacao.class
+Avaliacao.class
+S3Service.class
+SlackNotifier.class
+S3Provider.class
+Feedback.class
